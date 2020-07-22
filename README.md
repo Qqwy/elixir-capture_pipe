@@ -2,7 +2,7 @@
 
 
 [![hex.pm version](https://img.shields.io/hexpm/v/capture_pipe.svg)](https://hex.pm/packages/capture_pipe)
-[![Build Status](https://travis-ci.org/Qqwy/elixir-capture_pipe.svg?branch=master)](https://travis-ci.org/Qqwy/elixir-capture_pipe)
+[![Build Status](https://travis-ci.com/Qqwy/elixir-capture_pipe.svg?branch=master)](https://travis-ci.com/Qqwy/elixir-capture_pipe)
 [![Documentation](https://img.shields.io/badge/hexdocs-latest-blue.svg)](https://hexdocs.pm/capture_pipe/index.html)
 
 CapturePipe exposes an extended pipe-operator that allows the usage of bare function captures.
