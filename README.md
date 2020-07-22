@@ -38,6 +38,7 @@ It also works multiple times in a row.
 ```elixir
 iex> 20 |> &{:ok, &1} |> &[&1, 2, 3]
 [{:ok, 20}, 2, 3]
+```
 
 Besides the function-capture syntax
 CapturePipe also enables you to use anonymnous functions
@@ -46,8 +47,6 @@ directly inside a pipe, performing similar wrapping:
 ```elixir
 iex> 42 |> fn val -> to_string(val) end
 "42"
-```
-
 ```
 
 Even if the pipes are nested deeply
