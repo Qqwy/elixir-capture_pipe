@@ -48,6 +48,13 @@ defmodule CapturePipe do
       iex> 20 |> &{:ok, &1} |> &[&1, 2, 3]
       [{:ok, 20}, 2, 3]
 
+  Besides the function-capture syntax
+  CapturePipe also enables you to use anonymnous functions
+  directly inside a pipe, performing similar wrapping:
+
+      iex> 42 |> fn val -> to_string(val) end
+      "42"
+
   Even if the pipes are nested deeply
   and interspersed with 'normal' pipe calls:
 
@@ -60,6 +67,11 @@ defmodule CapturePipe do
       iex> |> &{:ok, &1}
       iex> )
       {:ok, "THE ANSWER IS: -2!"}
+
+  Currently, the implementation raises errors when
+  captures or anonymous functions with a bad arity are used
+  _at runtime_. This might be improved in the future
+  to raise compile-time errors whenever possible instead.
   """
   # The implementation is identical to
   # Elixir's builtin one,
@@ -101,6 +113,10 @@ defmodule CapturePipe do
   # Bare captures are wrapped to become
   # (&(...)).()
   defp pipe(expr, {:&, _, _} = call_args, position) do
+    pipe(expr, quote do (unquote(call_args)).() end, position)
+  end
+
+  defp pipe(expr, {:fn, _ ,_} = call_args, position) do
     pipe(expr, quote do (unquote(call_args)).() end, position)
   end
 
