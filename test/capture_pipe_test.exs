@@ -5,6 +5,14 @@ defmodule CapturePipeTest do
   import Kernel, except: [|>: 2]
   doctest CapturePipe
 
+  describe "Backwards compatibility with existing Elixir code" do
+    test "We can still assign a capture containing a pipe to a variable" do
+      x = & &1 |> to_string()
+
+      assert x.(10) == "10"
+    end
+  end
+
 
   describe "More complicated sequences of pipes with captures" do
     def speak(name, greeting) do
@@ -30,5 +38,4 @@ defmodule CapturePipeTest do
       assert speak("Jane", "Hello") == {:ok, "...HELLO, JANE..."}
     end
   end
-
 end
